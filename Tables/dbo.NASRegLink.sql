@@ -1,0 +1,25 @@
+SET ANSI_NULLS ON
+SET QUOTED_IDENTIFIER ON
+SET ANSI_PADDING OFF
+GO
+CREATE TABLE [dbo].[NASRegLink] (
+		[NASID]       [bigint] NOT NULL,
+		[REGID]       [bigint] NOT NULL,
+		[DcDtime]     [datetime] NULL
+) ON [PRIMARY]
+GO
+ALTER TABLE [dbo].[NASRegLink]
+	ADD
+	CONSTRAINT [DF_NASRegLink_DcDtime]
+	DEFAULT (getdate()) FOR [DcDtime]
+GO
+CREATE CLUSTERED INDEX [IX_NASRegLink]
+	ON [dbo].[NASRegLink] ([NASID])
+	ON [PRIMARY]
+GO
+CREATE NONCLUSTERED INDEX [IX_NASRegLink_1]
+	ON [dbo].[NASRegLink] ([REGID])
+	ON [PRIMARY]
+GO
+ALTER TABLE [dbo].[NASRegLink] SET (LOCK_ESCALATION = TABLE)
+GO
