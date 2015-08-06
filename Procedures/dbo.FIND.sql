@@ -8,7 +8,7 @@ Created Date     : 12 December 2007
 Created By       : Abhishek      
 Created Date     : 06 September 2007        
 ===================================================================================*/      
-CREATE Proc FIND       
+CREATE Proc [dbo].[FIND]       
  @strsearch varchar(100)        
 AS        
  set @strsearch='%'+@strsearch+'%'        
@@ -17,5 +17,7 @@ Select distinct a.id,a.name,(case a.xtype when 'P' then 'SP' when 'V' then 'VIEW
  syscomments b with (NOLOCK) on a.id=b.id        
   where a.xtype in ('P','V')        
   and (b.text like @strsearch) order by a.name  
+
+  --test jaya
   
 GO
